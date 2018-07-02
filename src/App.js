@@ -81,9 +81,12 @@ class App extends Component {
     const leftTodo = this.state.todos.filter(todo => {
       if(todo.id !== id) { return true };
     });
-    this.setState({
-      todos: leftTodo
-    });
+    axios.delete(`${this.apiUrl}/${id}`)
+      .then(response => {
+        this.setState({
+          todos: leftTodo
+        });
+      });
   }
 
 }
