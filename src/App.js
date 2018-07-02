@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+window.id = 0;
+
 const Title = ({ title }) => {
     return (
       <h1>{title}</h1>
@@ -14,7 +16,7 @@ const Todo = ({ todo }) => {
 
 const TodoList = ({ todos }) => {
   const todoList = todos.map(todo => {
-    return (<Todo todo={todo} />);
+    return (<Todo todo={todo} key={todo.id}/>);
   });
   return (
     <ul>
@@ -23,28 +25,44 @@ const TodoList = ({ todos }) => {
   );
 }
 
-const TodoForm = () => {
+const TodoForm = ({ addTodo }) => {
   let input;
   return (
     <div>
       <input ref={node => { input=node; }} />
-      <button >+</button>
+      <button onClick={() => {addTodo(input.value);}}>+</button>
     </div>
     );
 }
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      todos: []
+    };
+  }
+
   render() {
-    const todos = [{title: 'Todo 1'}, {title: 'Todo 2'}, {title: 'Todo 3'}]
+    // const todos = [{title: 'Todo 1'}, {title: 'Todo 2'}, {title: 'Todo 3'}]
     return (
       <div>
         <Title title={"Todo"}/>
-        <TodoForm />
-        <TodoList todos={todos} />
+        <TodoForm addTodo={this.addTodo.bind(this)}/>
+        <TodoList todos={this.state.todos} />
       </div>
     );
   }
+
+  addTodo(value) {
+    const todo = { title: value, id: window.id++ };
+    this.state.todos.push(todo);
+    this.setState({
+      todos: this.state.todos
+    })
+  }
+
 }
 
 export default App;
