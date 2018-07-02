@@ -67,11 +67,14 @@ class App extends Component {
   }
 
   addTodo(value) {
-    const todo = { title: value, id: window.id++ };
-    this.state.todos.push(todo);
-    this.setState({
-      todos: this.state.todos
-    })
+    const todo = { title: value };
+    axios.post(`${this.apiUrl}/`, todo)
+      .then(response => {
+        this.state.todos.push(response.data);
+        this.setState({
+          todos: this.state.todos
+        });
+      });
   }
 
   removeTodo(id) {
