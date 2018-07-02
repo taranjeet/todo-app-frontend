@@ -23,6 +23,16 @@ const TodoList = ({ todos }) => {
   );
 }
 
+const TodoForm = () => {
+  let input;
+  return (
+    <div>
+      <input ref={node => { input=node; }} />
+      <button >+</button>
+    </div>
+    );
+}
+
 class App extends Component {
 
   render() {
@@ -30,6 +40,7 @@ class App extends Component {
     return (
       <div>
         <Title title={"Todo"}/>
+        <TodoForm />
         <TodoList todos={todos} />
       </div>
     );
