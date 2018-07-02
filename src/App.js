@@ -8,15 +8,18 @@ const Title = ({ title }) => {
     );
 }
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, removeTodo }) => {
   return (
-    <li>{todo.title}</li>
+    <li>
+      {todo.title}
+      <button onClick={() => { removeTodo(todo.id) }} >X</button>
+    </li>
   );
 }
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, removeTodo }) => {
   const todoList = todos.map(todo => {
-    return (<Todo todo={todo} key={todo.id}/>);
+    return (<Todo todo={todo} key={todo.id} removeTodo={removeTodo} />);
   });
   return (
     <ul>
@@ -49,7 +52,7 @@ class App extends Component {
       <div>
         <Title title={"Todo"}/>
         <TodoForm addTodo={this.addTodo.bind(this)}/>
-        <TodoList todos={this.state.todos} />
+        <TodoList todos={this.state.todos} removeTodo={this.removeTodo.bind(this)}/>
       </div>
     );
   }
@@ -60,6 +63,15 @@ class App extends Component {
     this.setState({
       todos: this.state.todos
     })
+  }
+
+  removeTodo(id) {
+    const leftTodo = this.state.todos.filter(todo => {
+      if(todo.id !== id) { return true };
+    });
+    this.setState({
+      todos: leftTodo
+    });
   }
 
 }
