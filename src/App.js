@@ -30,7 +30,7 @@ const TodoForm = ({ addTodo }) => {
   return (
     <div>
       <input ref={node => { input=node; }} />
-      <button onClick={() => {addTodo(input.value);}}>+</button>
+      <button onClick={() => {addTodo(input.value); input.value='';}}>+</button>
     </div>
     );
 }
@@ -45,7 +45,6 @@ class App extends Component {
   }
 
   render() {
-    // const todos = [{title: 'Todo 1'}, {title: 'Todo 2'}, {title: 'Todo 3'}]
     return (
       <div>
         <Title title={"Todo"}/>
