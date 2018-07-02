@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 window.id = 0;
 
@@ -45,6 +46,14 @@ class App extends Component {
     this.state = {
       todos: []
     };
+    this.apiUrl = 'http://localhost:8003/simple'
+  }
+
+  componentDidMount() {
+    axios.get(`${this.apiUrl}?format=json`)
+      .then(response => {
+        this.setState({ todos: response.data });
+      })
   }
 
   render() {
