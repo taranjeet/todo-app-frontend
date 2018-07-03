@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {
-  Button,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  ListGroup,
-  ListGroupItem
-} from 'reactstrap';
 
 import {
   Title,
-  Todo,
   TodoList,
   TodoForm
 } from './components';
 
-
-window.id = 0;
 
 class App extends Component {
 
@@ -38,9 +27,9 @@ class App extends Component {
 
   render() {
     return (
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-8 offset-sm-2">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-8 offset-sm-2">
             <Title title={"Todo"}/>
             <hr/>
             <TodoForm addTodo={this.addTodo.bind(this)}/>

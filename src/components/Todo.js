@@ -8,11 +8,11 @@ import {
 const Todo = ({ todo, removeTodo }) => {
   return (
     <ListGroupItem>
-      <div class="row">
-        <div class="col-sm-11">
+      <div className="row">
+        <div className="col-sm-11">
           {todo.title}
         </div>
-        <div class="col-sm-1">
+        <div className="col-sm-1">
           <Button color="danger" onClick={() => { removeTodo(todo.id) }} >X</Button>
         </div>
       </div>
