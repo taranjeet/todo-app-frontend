@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  ListGroup,
+  ListGroupItem
+} from 'reactstrap';
 
 window.id = 0;
 
@@ -11,10 +19,16 @@ const Title = ({ title }) => {
 
 const Todo = ({ todo, removeTodo }) => {
   return (
-    <li>
-      {todo.title}
-      <button onClick={() => { removeTodo(todo.id) }} >X</button>
-    </li>
+    <ListGroupItem>
+      <div class="row">
+        <div class="col-sm-11">
+          {todo.title}
+        </div>
+        <div class="col-sm-1">
+          <Button color="danger" onClick={() => { removeTodo(todo.id) }} >X</Button>
+        </div>
+      </div>
+    </ListGroupItem>
   );
 }
 
@@ -23,9 +37,9 @@ const TodoList = ({ todos, removeTodo }) => {
     return (<Todo todo={todo} key={todo.id} removeTodo={removeTodo} />);
   });
   return (
-    <ul>
+    <ListGroup>
       {todoList}
-    </ul>
+    </ListGroup>
   );
 }
 
@@ -33,8 +47,12 @@ const TodoForm = ({ addTodo }) => {
   let input;
   return (
     <div>
-      <input ref={node => { input=node; }} />
-      <button onClick={() => {addTodo(input.value); input.value='';}}>+</button>
+      <InputGroup>
+        <Input innerRef={node => { input=node; }} ></Input>
+        <InputGroupAddon addonType="append">
+          <Button color="success" onClick={() => {addTodo(input.value); input.value='';}}>+</Button>
+        </InputGroupAddon>
+      </InputGroup>
     </div>
     );
 }
@@ -58,10 +76,16 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Title title={"Todo"}/>
-        <TodoForm addTodo={this.addTodo.bind(this)}/>
-        <TodoList todos={this.state.todos} removeTodo={this.removeTodo.bind(this)}/>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-8 offset-sm-2">
+            <Title title={"Todo"}/>
+            <hr/>
+            <TodoForm addTodo={this.addTodo.bind(this)}/>
+            <hr/>
+            <TodoList todos={this.state.todos} removeTodo={this.removeTodo.bind(this)}/>
+          </div>
+        </div>
       </div>
     );
   }
