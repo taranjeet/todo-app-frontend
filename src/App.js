@@ -9,53 +9,15 @@ import {
   ListGroupItem
 } from 'reactstrap';
 
+import {
+  Title,
+  Todo,
+  TodoList,
+  TodoForm
+} from './components';
+
+
 window.id = 0;
-
-const Title = ({ title }) => {
-    return (
-      <h1>{title}</h1>
-    );
-}
-
-const Todo = ({ todo, removeTodo }) => {
-  return (
-    <ListGroupItem>
-      <div class="row">
-        <div class="col-sm-11">
-          {todo.title}
-        </div>
-        <div class="col-sm-1">
-          <Button color="danger" onClick={() => { removeTodo(todo.id) }} >X</Button>
-        </div>
-      </div>
-    </ListGroupItem>
-  );
-}
-
-const TodoList = ({ todos, removeTodo }) => {
-  const todoList = todos.map(todo => {
-    return (<Todo todo={todo} key={todo.id} removeTodo={removeTodo} />);
-  });
-  return (
-    <ListGroup>
-      {todoList}
-    </ListGroup>
-  );
-}
-
-const TodoForm = ({ addTodo }) => {
-  let input;
-  return (
-    <div>
-      <InputGroup>
-        <Input innerRef={node => { input=node; }} ></Input>
-        <InputGroupAddon addonType="append">
-          <Button color="success" onClick={() => {addTodo(input.value); input.value='';}}>+</Button>
-        </InputGroupAddon>
-      </InputGroup>
-    </div>
-    );
-}
 
 class App extends Component {
 
